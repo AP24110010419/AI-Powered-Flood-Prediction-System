@@ -12,13 +12,14 @@ from models import db, Users, MLModel, WeatherData, PredictionResult
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_DIR = os.path.join(BASE_DIR, "ml")
 
-# Create the instance directory if it doesn't exist
-INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
-os.makedirs(INSTANCE_DIR, exist_ok=True)
+app = Flask(__name__, instance_relative_config=True)
 
-app = Flask(__name__)
+os.makedirs(app.instance_path, exist_ok=True)
+
 app.config["SECRET_KEY"] = "flood-watch-dev-secret-change-me"
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{os.path.join(INSTANCE_DIR, 'floodwatch.db')}"
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///" + os.path.join(app.instance_path, "floodwatch.db")
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
