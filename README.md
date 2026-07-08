@@ -1,20 +1,49 @@
 # 🌊 AI-Powered Flood Prediction System
 
-An AI-powered Flood Prediction System built using **Flask**, **Python**, and **Machine Learning** to predict flood risk based on rainfall and environmental data. The application provides an intuitive web interface for users to analyze flood predictions using multiple trained machine learning models.
+> **An AI-powered web application that predicts flood risk using Machine Learning, historical rainfall data, and live weather information.**
+
+![Python](https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python)
+![Flask](https://img.shields.io/badge/Flask-Web%20Framework-black?style=for-the-badge&logo=flask)
+![Machine Learning](https://img.shields.io/badge/Machine-Learning-green?style=for-the-badge)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 
 ---
 
-## 📌 Features
+# 📖 Project Overview
+
+The **AI-Powered Flood Prediction System** is a Flask-based web application that predicts the probability of floods using Machine Learning models, historical rainfall data, and live weather information.
+
+The system provides an intuitive web interface that allows users to:
+
+- 🔐 Register and Login securely
+- 🌍 Fetch live weather data
+- 🌧️ Predict flood probability
+- 📜 View prediction history
+- 🤖 Compare multiple Machine Learning models
+- 💾 Store prediction records in a database
+
+The project follows the database architecture:
+
+**Users → Weather_Data → Prediction_Result ← ML_Model**
+
+---
+
+# ✨ Features
 
 - 🔐 User Authentication (Login & Registration)
+- 🌍 Live Weather Integration (Open-Meteo API)
+- 🌧️ AI-Based Flood Prediction
 - 📊 Interactive Dashboard
-- 🎨 Responsive and Modern User Interface
-- 📈 Rainfall Data Analysis
-
+- 📈 Flood Probability Estimation
+- 📜 Prediction History
+- 🤖 Multiple Machine Learning Models
+- 💾 SQLite Database
+- 🎨 Responsive User Interface
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Technology Stack
 
 ### Frontend
 - HTML5
@@ -26,81 +55,256 @@ An AI-powered Flood Prediction System built using **Flask**, **Python**, and **M
 - Flask
 
 ### Machine Learning
-- Scikit-learn
+- Scikit-Learn
+- Random Forest
+- Decision Tree
+- K-Nearest Neighbors (KNN)
 - XGBoost
-- Joblib
 
 ### Database
 - SQLite
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
-floodapp/
-  app.py                  Flask routes, prediction logic
-  models.py               SQLAlchemy models (Users, MLModel, WeatherData, PredictionResult)
-  ml/
-    train_model.py         Retrains all 4 models from the raw dataset
-    best_model.pkl          Active model used for live predictions
-    decision_tree.pkl, knn.pkl, xgboost.pkl   The other 3 trained models
-    model_meta.json          Accuracy metadata, seeds the ML_Model table
-    state_rainfall.json      Historical per-state rainfall averages (1901–2015)
-  templates/               Jinja templates
-  static/css/style.css     Shared styling
-  requirements.txt
+```text
+AI-Powered-Flood-Prediction-System/
+│
+├── app.py
+├── models.py
+├── requirements.txt
+├── README.md
+│
+├── ml/
+│   ├── train_model.py
+│   ├── best_model.pkl
+│   ├── decision_tree.pkl
+│   ├── knn.pkl
+│   ├── xgboost.pkl
+│   ├── model_meta.json
+│   └── state_rainfall.json
+│
+├── static/
+├── templates/
+├── screenshots/
+└── instance/
 ```
 
-## Run it locally
+---
+
+# 📸 Application Screenshots
+
+<table>
+<tr>
+<td align="center">
+<b>Login Page</b><br>
+<img src="screenshots/login.png" width="430">
+</td>
+
+<td align="center">
+<b>Registration Page</b><br>
+<img src="screenshots/register.png" width="430">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Prediction Dashboard</b><br>
+<img src="screenshots/dashboard.png" width="430">
+</td>
+
+<td align="center">
+<b>Flood Prediction Result</b><br>
+<img src="screenshots/flood_prediction.png" width="430">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Prediction History</b><br>
+<img src="screenshots/history.png" width="430">
+</td>
+
+<td align="center">
+<b>Prediction Result</b><br>
+<img src="screenshots/result.png" width="430">
+</td>
+</tr>
+
+<tr>
+<td align="center">
+<b>Users Table</b><br>
+<img src="screenshots/users_table.png" width="430">
+</td>
+
+<td align="center">
+<b>Weather Data Table</b><br>
+<img src="screenshots/weather_data.png" width="430">
+</td>
+</tr>
+</table>
+
+---
+
+# 🚀 Installation
+
+### Clone the repository
 
 ```bash
-cd floodapp
-python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+git clone https://github.com/AP24110010419/AI-Powered-Flood-Prediction-System.git
+```
+
+### Navigate to the project folder
+
+```bash
+cd AI-Powered-Flood-Prediction-System
+```
+
+### Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# create the database tables and seed the model registry
-flask --app app init-db
+### Run the application
 
-# start the dev server
+```bash
 python app.py
 ```
 
-Open **http://127.0.0.1:5000**, register an account, and run your first prediction.
+### Open the application
 
-## Live weather by location
+```
+http://127.0.0.1:5000
+```
 
-On the Predict page, type a place name (e.g. "Kochi, Kerala") and click **Use current
-weather** — this calls Open-Meteo's free geocoding + forecast APIs (no API key required)
-to pull the current temperature, humidity, and cloud cover for that place and drops them
-straight into the form. Combine it with the historical rainfall autofill (state dropdown)
-for annual/monsoon rainfall, then run the prediction. Requires internet access from the
-machine running the Flask app — it makes an outbound HTTPS request, not just localhost.
+---
 
-## About the model
+# 🌍 Live Weather Integration
 
-- Trained on `flood_dataset.xlsx` (115 samples, 16 flood events) using five features that
-  map directly onto the `Weather_Data` table: **Temperature, Humidity, Cloud Cover,
-  Annual Rainfall, Monsoon (Jun–Sep) Rainfall**.
-- All four algorithms were evaluated with 5-fold stratified cross-validation (more reliable
-  than a single split on this small a dataset); the best one is refit on the full dataset
-  and used for live predictions. Currently that's **Random Forest** (~99% CV accuracy,
-  95.7% on the held-out test split) — rerun `ml/train_model.py` any time you add more data,
-  and it will re-pick whichever model performs best.
-- `CloudVisibility` in the ER diagram is populated from the dataset's cloud cover reading
-  (higher cover → more rain risk), and `SeasonalRainfall` uses the Jun–Sep monsoon total,
-  since that's India's primary flood season.
+The application uses the **Open-Meteo API** to fetch:
 
-## Note on the dataset
+- 🌡 Temperature
+- 💧 Humidity
+- ☁ Cloud Cover
 
-115 rows with only 16 positive (flood) cases is a small, imbalanced sample. The reported
-accuracy numbers are honest results from this run, not guaranteed to match any specific
-number you may have seen elsewhere — as you gather more historical records, retrain with
-`train_model.py` for more robust numbers.
+Users can enter a location (for example, **Kochi, Kerala**) to retrieve current weather information before running the flood prediction.
 
-## Next steps you might want
+---
 
-- Swap SQLite for Postgres/Db2 for an IBM Cloud deployment (`SQLALCHEMY_DATABASE_URI`).
-- Add an admin view to retrain/upload new datasets from the browser.
-- Add email alerts when a prediction crosses the "High" risk threshold.
+# 🤖 Machine Learning Models
+
+The application evaluates multiple Machine Learning algorithms.
+
+| Model | Purpose |
+|--------|---------|
+| Decision Tree | Classification |
+| Random Forest | Active Prediction Model |
+| K-Nearest Neighbors (KNN) | Classification |
+| XGBoost | High Accuracy Prediction |
+
+The model with the best performance is automatically selected for live predictions.
+
+---
+
+# 📊 Datasets
+
+This project uses:
+
+- Flood Prediction Dataset
+- Rainfall in India (1901–2015)
+
+Prediction is based on the following features:
+
+- Annual Rainfall
+- Monsoon Rainfall
+- Temperature
+- Humidity
+- Cloud Cover
+
+---
+
+# 🗄️ Database Schema
+
+The system contains four primary tables:
+
+- Users
+- Weather_Data
+- Prediction_Result
+- ML_Model
+
+These tables store user accounts, weather readings, trained models, and prediction history.
+
+---
+
+# 🔄 Project Workflow
+
+```text
+User Login/Register
+        │
+        ▼
+Enter Location
+        │
+        ▼
+Fetch Live Weather
+        │
+        ▼
+Historical Rainfall Data
+        │
+        ▼
+Feature Processing
+        │
+        ▼
+Machine Learning Model
+        │
+        ▼
+Flood Prediction
+        │
+        ▼
+Store Result in Database
+        │
+        ▼
+Prediction History
+```
+
+---
+
+# 🎯 Future Enhancements
+
+- 📱 Mobile Application
+- ☁️ Cloud Deployment
+- 📍 Interactive Flood Risk Maps
+- 📧 Email Notifications
+- 📊 Advanced Analytics Dashboard
+- 🌦 Weather Forecast Integration
+
+---
+
+# 👨‍💻 Author
+
+**Bhargav Parimi**
+
+**B.Tech – Computer Science Engineering**
+
+**SRM University AP**
+
+📧 Email: **bhargavparimi47@gmail.com**
+
+🔗 GitHub: **https://github.com/AP24110010419**
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+---
+
+<div align="center">
+
+## 🌊 AI-Powered Flood Prediction System
+
+**Built with ❤️ using Python, Flask, and Machine Learning**
+
+</div>
