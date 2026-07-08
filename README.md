@@ -7,16 +7,10 @@ An AI-powered Flood Prediction System built using **Flask**, **Python**, and **M
 ## 📌 Features
 
 - 🔐 User Authentication (Login & Registration)
-- 🌧️ Flood Prediction using Machine Learning
 - 📊 Interactive Dashboard
-- 📜 Prediction History
-- 🤖 Multiple ML Models
-  - Decision Tree
-  - K-Nearest Neighbors (KNN)
-  - XGBoost
 - 🎨 Responsive and Modern User Interface
 - 📈 Rainfall Data Analysis
-- 💾 Prediction History Storage
+
 
 ---
 
