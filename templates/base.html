@@ -7,7 +7,7 @@
   <link rel="icon" href="{{ url_for('static', filename='img/icon-predict.svg') }}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=4">
 </head>
 <body>
   <div class="sky" id="skyBg" aria-hidden="true">
@@ -15,53 +15,40 @@
     <div class="sky-moon"></div>
     <div class="sky-sun"></div>
 
-    <svg width="0" height="0" style="position:absolute">
-      <defs>
-        <radialGradient id="cloudGradBack" cx="38%" cy="30%" r="75%">
-          <stop offset="0%" stop-color="#e2ebf5"/>
-          <stop offset="55%" stop-color="#c7d4e4"/>
-          <stop offset="100%" stop-color="#a9bad0"/>
-        </radialGradient>
-        <radialGradient id="cloudGradMid" cx="36%" cy="28%" r="78%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="55%" stop-color="#eef3f9"/>
-          <stop offset="100%" stop-color="#c9d6e6"/>
-        </radialGradient>
-        <radialGradient id="cloudGradFront" cx="34%" cy="26%" r="80%">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="45%" stop-color="#ffffff"/>
-          <stop offset="80%" stop-color="#dde7f2"/>
-          <stop offset="100%" stop-color="#b9c8dc"/>
-        </radialGradient>
-      </defs>
-    </svg>
-
     <div class="cloud-layer layer-back">
       <div class="cloud-track">
         <svg class="cloud-set" viewBox="0 0 900 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradBack)">
-            <ellipse cx="120" cy="128" rx="140" ry="42"/>
-            <ellipse cx="185" cy="108" rx="90"  ry="36"/>
-            <ellipse cx="230" cy="95"  rx="100" ry="34"/>
-            <ellipse cx="70"  cy="112" rx="70"  ry="28"/>
-            <ellipse cx="520" cy="140" rx="160" ry="46"/>
-            <ellipse cx="470" cy="118" rx="95"  ry="34"/>
-            <ellipse cx="640" cy="110" rx="110" ry="36"/>
-            <ellipse cx="820" cy="130" rx="120" ry="38"/>
-            <ellipse cx="875" cy="112" rx="70"  ry="28"/>
+          <defs>
+            <radialGradient id="cgBack1" cx="40%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#f4f8fc"/><stop offset="100%" stop-color="#c4d2e2"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgBack1)">
+            <ellipse cx="130" cy="129" rx="87" ry="20"/>
+            <circle cx="63" cy="113" r="32"/><circle cx="96" cy="94" r="42"/><circle cx="130" cy="86" r="51"/><circle cx="164" cy="97" r="43"/><circle cx="197" cy="115" r="34"/>
+            <ellipse cx="430" cy="156" rx="99" ry="22"/>
+            <circle cx="354" cy="138" r="37"/><circle cx="392" cy="117" r="48"/><circle cx="430" cy="107" r="58"/><circle cx="468" cy="120" r="49"/><circle cx="506" cy="140" r="38"/>
+            <ellipse cx="650" cy="122" rx="78" ry="18"/>
+            <circle cx="590" cy="108" r="29"/><circle cx="620" cy="90" r="37"/><circle cx="650" cy="83" r="46"/><circle cx="680" cy="94" r="38"/><circle cx="710" cy="109" r="30"/>
+            <ellipse cx="830" cy="143" rx="82" ry="19"/>
+            <circle cx="767" cy="128" r="31"/><circle cx="798" cy="110" r="40"/><circle cx="830" cy="102" r="48"/><circle cx="862" cy="113" r="41"/><circle cx="893" cy="129" r="32"/>
           </g>
         </svg>
         <svg class="cloud-set" viewBox="0 0 900 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradBack)">
-            <ellipse cx="120" cy="128" rx="140" ry="42"/>
-            <ellipse cx="185" cy="108" rx="90"  ry="36"/>
-            <ellipse cx="230" cy="95"  rx="100" ry="34"/>
-            <ellipse cx="70"  cy="112" rx="70"  ry="28"/>
-            <ellipse cx="520" cy="140" rx="160" ry="46"/>
-            <ellipse cx="470" cy="118" rx="95"  ry="34"/>
-            <ellipse cx="640" cy="110" rx="110" ry="36"/>
-            <ellipse cx="820" cy="130" rx="120" ry="38"/>
-            <ellipse cx="875" cy="112" rx="70"  ry="28"/>
+          <defs>
+            <radialGradient id="cgBack2" cx="40%" cy="30%" r="75%">
+              <stop offset="0%" stop-color="#f4f8fc"/><stop offset="100%" stop-color="#c4d2e2"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgBack2)">
+            <ellipse cx="130" cy="129" rx="87" ry="20"/>
+            <circle cx="63" cy="113" r="32"/><circle cx="96" cy="94" r="42"/><circle cx="130" cy="86" r="51"/><circle cx="164" cy="97" r="43"/><circle cx="197" cy="115" r="34"/>
+            <ellipse cx="430" cy="156" rx="99" ry="22"/>
+            <circle cx="354" cy="138" r="37"/><circle cx="392" cy="117" r="48"/><circle cx="430" cy="107" r="58"/><circle cx="468" cy="120" r="49"/><circle cx="506" cy="140" r="38"/>
+            <ellipse cx="650" cy="122" rx="78" ry="18"/>
+            <circle cx="590" cy="108" r="29"/><circle cx="620" cy="90" r="37"/><circle cx="650" cy="83" r="46"/><circle cx="680" cy="94" r="38"/><circle cx="710" cy="109" r="30"/>
+            <ellipse cx="830" cy="143" rx="82" ry="19"/>
+            <circle cx="767" cy="128" r="31"/><circle cx="798" cy="110" r="40"/><circle cx="830" cy="102" r="48"/><circle cx="862" cy="113" r="41"/><circle cx="893" cy="129" r="32"/>
           </g>
         </svg>
       </div>
@@ -70,31 +57,37 @@
     <div class="cloud-layer layer-mid">
       <div class="cloud-track">
         <svg class="cloud-set" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradMid)">
-            <ellipse cx="80"  cy="158" rx="120" ry="40"/>
-            <ellipse cx="150" cy="132" rx="80"  ry="32"/>
-            <ellipse cx="180" cy="120" rx="90"  ry="32"/>
-            <ellipse cx="30"  cy="140" rx="60"  ry="26"/>
-            <ellipse cx="420" cy="168" rx="150" ry="44"/>
-            <ellipse cx="360" cy="140" rx="100" ry="36"/>
-            <ellipse cx="560" cy="130" rx="100" ry="34"/>
-            <ellipse cx="620" cy="150" rx="80"  ry="30"/>
-            <ellipse cx="760" cy="158" rx="130" ry="40"/>
-            <ellipse cx="700" cy="132" rx="85"  ry="30"/>
+          <defs>
+            <radialGradient id="cgMid1" cx="40%" cy="28%" r="75%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#d3dfec"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgMid1)">
+            <ellipse cx="90" cy="164" rx="87" ry="20"/>
+            <circle cx="23" cy="148" r="32"/><circle cx="56" cy="129" r="42"/><circle cx="90" cy="121" r="51"/><circle cx="124" cy="132" r="43"/><circle cx="157" cy="150" r="34"/>
+            <ellipse cx="400" cy="177" rx="102" ry="23"/>
+            <circle cx="322" cy="158" r="38"/><circle cx="361" cy="136" r="49"/><circle cx="400" cy="126" r="60"/><circle cx="439" cy="140" r="50"/><circle cx="478" cy="160" r="39"/>
+            <ellipse cx="590" cy="141" rx="75" ry="17"/>
+            <circle cx="532" cy="128" r="28"/><circle cx="561" cy="111" r="36"/><circle cx="590" cy="104" r="44"/><circle cx="619" cy="114" r="37"/><circle cx="648" cy="129" r="29"/>
+            <ellipse cx="790" cy="170" rx="93" ry="21"/>
+            <circle cx="719" cy="153" r="35"/><circle cx="754" cy="133" r="45"/><circle cx="790" cy="124" r="55"/><circle cx="826" cy="136" r="46"/><circle cx="861" cy="155" r="36"/>
           </g>
         </svg>
         <svg class="cloud-set" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradMid)">
-            <ellipse cx="80"  cy="158" rx="120" ry="40"/>
-            <ellipse cx="150" cy="132" rx="80"  ry="32"/>
-            <ellipse cx="180" cy="120" rx="90"  ry="32"/>
-            <ellipse cx="30"  cy="140" rx="60"  ry="26"/>
-            <ellipse cx="420" cy="168" rx="150" ry="44"/>
-            <ellipse cx="360" cy="140" rx="100" ry="36"/>
-            <ellipse cx="560" cy="130" rx="100" ry="34"/>
-            <ellipse cx="620" cy="150" rx="80"  ry="30"/>
-            <ellipse cx="760" cy="158" rx="130" ry="40"/>
-            <ellipse cx="700" cy="132" rx="85"  ry="30"/>
+          <defs>
+            <radialGradient id="cgMid2" cx="40%" cy="28%" r="75%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#d3dfec"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgMid2)">
+            <ellipse cx="90" cy="164" rx="87" ry="20"/>
+            <circle cx="23" cy="148" r="32"/><circle cx="56" cy="129" r="42"/><circle cx="90" cy="121" r="51"/><circle cx="124" cy="132" r="43"/><circle cx="157" cy="150" r="34"/>
+            <ellipse cx="400" cy="177" rx="102" ry="23"/>
+            <circle cx="322" cy="158" r="38"/><circle cx="361" cy="136" r="49"/><circle cx="400" cy="126" r="60"/><circle cx="439" cy="140" r="50"/><circle cx="478" cy="160" r="39"/>
+            <ellipse cx="590" cy="141" rx="75" ry="17"/>
+            <circle cx="532" cy="128" r="28"/><circle cx="561" cy="111" r="36"/><circle cx="590" cy="104" r="44"/><circle cx="619" cy="114" r="37"/><circle cx="648" cy="129" r="29"/>
+            <ellipse cx="790" cy="170" rx="93" ry="21"/>
+            <circle cx="719" cy="153" r="35"/><circle cx="754" cy="133" r="45"/><circle cx="790" cy="124" r="55"/><circle cx="826" cy="136" r="46"/><circle cx="861" cy="155" r="36"/>
           </g>
         </svg>
       </div>
@@ -103,38 +96,89 @@
     <div class="cloud-layer layer-front">
       <div class="cloud-track">
         <svg class="cloud-set" viewBox="0 0 900 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradFront)">
-            <ellipse cx="150" cy="190" rx="150" ry="46"/>
-            <ellipse cx="230" cy="158" rx="95"  ry="36"/>
-            <ellipse cx="270" cy="150" rx="100" ry="34"/>
-            <ellipse cx="80"  cy="168" rx="70"  ry="30"/>
-            <ellipse cx="560" cy="200" rx="170" ry="48"/>
-            <ellipse cx="490" cy="166" rx="105" ry="38"/>
-            <ellipse cx="700" cy="160" rx="110" ry="36"/>
-            <ellipse cx="770" cy="184" rx="80"  ry="32"/>
+          <defs>
+            <radialGradient id="cgFront1" cx="40%" cy="26%" r="78%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#dbe6f0"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgFront1)">
+            <ellipse cx="160" cy="198" rx="108" ry="24"/>
+            <circle cx="77" cy="179" r="40"/><circle cx="118" cy="155" r="52"/><circle cx="160" cy="145" r="63"/><circle cx="202" cy="159" r="53"/><circle cx="243" cy="181" r="42"/>
+            <ellipse cx="420" cy="166" rx="75" ry="17"/>
+            <circle cx="362" cy="152" r="28"/><circle cx="391" cy="136" r="36"/><circle cx="420" cy="129" r="44"/><circle cx="449" cy="139" r="37"/><circle cx="478" cy="154" r="29"/>
+            <ellipse cx="600" cy="216" rx="120" ry="27"/>
+            <circle cx="508" cy="194" r="45"/><circle cx="554" cy="168" r="58"/><circle cx="600" cy="156" r="70"/><circle cx="646" cy="172" r="59"/><circle cx="692" cy="196" r="46"/>
+            <ellipse cx="760" cy="174" rx="87" ry="20"/>
+            <circle cx="693" cy="158" r="32"/><circle cx="726" cy="139" r="42"/><circle cx="760" cy="131" r="51"/><circle cx="794" cy="142" r="43"/><circle cx="827" cy="160" r="34"/>
           </g>
         </svg>
         <svg class="cloud-set" viewBox="0 0 900 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-          <g fill="url(#cloudGradFront)">
-            <ellipse cx="150" cy="190" rx="150" ry="46"/>
-            <ellipse cx="230" cy="158" rx="95"  ry="36"/>
-            <ellipse cx="270" cy="150" rx="100" ry="34"/>
-            <ellipse cx="80"  cy="168" rx="70"  ry="30"/>
-            <ellipse cx="560" cy="200" rx="170" ry="48"/>
-            <ellipse cx="490" cy="166" rx="105" ry="38"/>
-            <ellipse cx="700" cy="160" rx="110" ry="36"/>
-            <ellipse cx="770" cy="184" rx="80"  ry="32"/>
+          <defs>
+            <radialGradient id="cgFront2" cx="40%" cy="26%" r="78%">
+              <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#dbe6f0"/>
+            </radialGradient>
+          </defs>
+          <g fill="url(#cgFront2)">
+            <ellipse cx="160" cy="198" rx="108" ry="24"/>
+            <circle cx="77" cy="179" r="40"/><circle cx="118" cy="155" r="52"/><circle cx="160" cy="145" r="63"/><circle cx="202" cy="159" r="53"/><circle cx="243" cy="181" r="42"/>
+            <ellipse cx="420" cy="166" rx="75" ry="17"/>
+            <circle cx="362" cy="152" r="28"/><circle cx="391" cy="136" r="36"/><circle cx="420" cy="129" r="44"/><circle cx="449" cy="139" r="37"/><circle cx="478" cy="154" r="29"/>
+            <ellipse cx="600" cy="216" rx="120" ry="27"/>
+            <circle cx="508" cy="194" r="45"/><circle cx="554" cy="168" r="58"/><circle cx="600" cy="156" r="70"/><circle cx="646" cy="172" r="59"/><circle cx="692" cy="196" r="46"/>
+            <ellipse cx="760" cy="174" rx="87" ry="20"/>
+            <circle cx="693" cy="158" r="32"/><circle cx="726" cy="139" r="42"/><circle cx="760" cy="131" r="51"/><circle cx="794" cy="142" r="43"/><circle cx="827" cy="160" r="34"/>
           </g>
         </svg>
       </div>
     </div>
 
-    <div class="sky-haze"></div>
-    <div class="sky-rain-far"></div>
-    <div class="sky-rain-near"></div>
+    <div class="sky-rain sky-rain-far"></div>
+    <div class="sky-rain sky-rain-near"></div>
     <div class="sky-storm-overlay"></div>
     <div class="sky-vignette"></div>
   </div>
+
+  <script>
+    (function initSkyTime() {
+      const sky = document.getElementById('skyBg');
+      if (!sky) return;
+      const hour = new Date().getHours();
+      const isDay = hour >= 6 && hour < 19; // roughly sunrise to sunset
+      sky.classList.toggle('day', isDay);
+      sky.classList.toggle('night', !isDay);
+    })();
+
+    // Called by dashboard.html when a live weather reading or slider changes,
+    // so the sky reflects the actual cloud cover / rain probability entered.
+    // Picks a discrete weather tier (clear / cloudy / rain / storm) for a clear
+    // visual jump, while opacity still scales smoothly within each tier.
+    window.setSkyWeather = function(cloudCoverPct, rainProbPct) {
+      const sky = document.getElementById('skyBg');
+      if (!sky) { console.warn('setSkyWeather: #skyBg not found'); return; }
+      const c = Math.max(0, Math.min(100, cloudCoverPct ?? 30));
+
+      let r = rainProbPct == null ? null : Math.max(0, Math.min(100, rainProbPct));
+      if (r === null) {
+        r = Math.max(0, (c - 40) * 1.2);
+      }
+
+      let tier = 'clear';
+      if (r >= 65) tier = 'storm';
+      else if (r >= 35) tier = 'rain';
+      else if (c >= 55) tier = 'cloudy';
+
+      sky.classList.remove('weather-clear', 'weather-cloudy', 'weather-rain', 'weather-storm');
+      sky.classList.add('weather-' + tier);
+
+      sky.style.setProperty('--cloud-opacity', (0.2 + c / 115).toFixed(2));
+      sky.style.setProperty('--star-opacity', Math.max(0.1, 1 - c / 90).toFixed(2));
+      sky.style.setProperty('--moon-opacity', Math.max(0.25, 1 - c / 110).toFixed(2));
+      sky.style.setProperty('--sun-opacity', Math.max(0.35, 1 - c / 140).toFixed(2));
+      sky.style.setProperty('--storm-dark', tier === 'storm' ? '0.45' : tier === 'rain' ? '0.18' : '0');
+
+      console.log('[setSkyWeather]', { cloudCoverPct: c, rainProbPct: r, tier, classes: sky.className });
+    };
+  </script>
 
   <div class="wrap">
     <div class="topbar">
@@ -174,41 +218,5 @@
 
     {% block content %}{% endblock %}
   </div>
-
-  <script>
-    (function initSkyTime() {
-      const sky = document.getElementById('skyBg');
-      if (!sky) return;
-      const hour = new Date().getHours();
-      const isDay = hour >= 6 && hour < 19; // roughly sunrise to sunset
-      sky.classList.toggle('day', isDay);
-      sky.classList.toggle('night', !isDay);
-    })();
-
-    // Called by dashboard.html when a live weather reading or slider changes,
-    // so the sky reflects the actual cloud cover / rain probability entered.
-    // Picks a discrete weather tier (clear / cloudy / rain / storm) for a clear
-    // visual jump, while opacity still scales smoothly within each tier.
-    window.setSkyWeather = function(cloudCoverPct, rainProbPct) {
-      const sky = document.getElementById('skyBg');
-      if (!sky) return;
-      const c = Math.max(0, Math.min(100, cloudCoverPct ?? 30));
-      const r = rainProbPct == null ? null : Math.max(0, Math.min(100, rainProbPct));
-
-      let tier = 'clear';
-      if (r !== null && r >= 65) tier = 'storm';
-      else if (r !== null && r >= 35) tier = 'rain';
-      else if (c >= 55) tier = 'cloudy';
-
-      sky.classList.remove('weather-clear', 'weather-cloudy', 'weather-rain', 'weather-storm');
-      sky.classList.add('weather-' + tier);
-
-      sky.style.setProperty('--cloud-opacity', (0.2 + c / 115).toFixed(2));
-      sky.style.setProperty('--star-opacity', Math.max(0.1, 1 - c / 90).toFixed(2));
-      sky.style.setProperty('--moon-opacity', Math.max(0.25, 1 - c / 110).toFixed(2));
-      sky.style.setProperty('--sun-opacity', Math.max(0.35, 1 - c / 140).toFixed(2));
-      sky.style.setProperty('--storm-dark', tier === 'storm' ? '0.45' : tier === 'rain' ? '0.18' : '0');
-    };
-  </script>
 </body>
 </html>

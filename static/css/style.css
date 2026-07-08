@@ -5,8 +5,8 @@
   --accent-2:#7c9cff;
   --focus:#5ec8ff;
   --radius:14px; --radius-sm:8px;
-  --panel-bg:rgba(9,15,26,0.8);
-  --panel-blur:blur(18px);
+  --panel-bg:rgba(10,16,28,0.8);
+  --panel-blur:blur(20px);
   --cloud-opacity:0.55;
   --star-opacity:0.7;
   --moon-opacity:0.85;
@@ -34,20 +34,11 @@ a{color:inherit;}
   transition:background 1.6s ease;
 }
 .sky.day{
-  background:linear-gradient(180deg,
-    #3f7bc4 0%,
-    #5993d1 22%,
-    #79add9 42%,
-    #9cc4de 62%,
-    #bcd6dd 80%,
-    #cfdfd8 100%);
+  background:linear-gradient(180deg, #3d7ec2 0%, #6badde 40%, #a9d4e8 75%, #cbe6ee 100%);
 }
-.sky-haze{
-  position:absolute; inset:0; pointer-events:none;
-  opacity:0; transition:opacity 1.6s ease;
-  background:radial-gradient(140% 65% at 50% 100%, rgba(255,248,235,0.35) 0%, rgba(255,248,235,0.14) 35%, transparent 68%);
+.sky.day .sky-vignette{
+  background:radial-gradient(120% 90% at 50% 0%, rgba(10,20,35,0.05) 30%, rgba(6,12,20,0.4) 100%);
 }
-.sky.day .sky-haze{ opacity:1; }
 .sky.day .sky-stars, .sky.day .sky-moon{ opacity:0 !important; }
 .sky.night .sky-sun{ opacity:0 !important; }
 .sky-stars{
@@ -96,79 +87,61 @@ a{color:inherit;}
 .cloud-layer .cloud-track{ display:flex; width:200%; height:100%; }
 .cloud-layer .cloud-set{ width:50%; height:100%; flex-shrink:0; display:block; }
 
-.layer-back{ top:4%; height:220px; filter:brightness(var(--cloud-brightness)) blur(7px); opacity:calc(var(--cloud-opacity) * 0.55); }
+.layer-back{ top:4%; height:220px; filter:brightness(var(--cloud-brightness)) blur(6px); opacity:calc(var(--cloud-opacity) * 0.6); }
 .layer-back .cloud-track{ animation:driftLeft 150s linear infinite; }
 
-.layer-mid{ top:14%; height:240px; filter:brightness(var(--cloud-brightness)) blur(3px) drop-shadow(0 10px 14px rgba(20,32,52,0.12)); opacity:calc(var(--cloud-opacity) * 0.85); }
+.layer-mid{ top:14%; height:240px; filter:brightness(var(--cloud-brightness)) blur(3px); opacity:calc(var(--cloud-opacity) * 0.85); }
 .layer-mid .cloud-track{ animation:driftLeft 95s linear infinite; }
 
-.layer-front{ top:24%; height:260px; filter:brightness(var(--cloud-brightness)) drop-shadow(0 14px 18px rgba(20,32,52,0.16)); }
+.layer-front{ top:24%; height:260px; filter:brightness(var(--cloud-brightness)) blur(1px); }
 .layer-front .cloud-track{ animation:driftLeft 60s linear infinite; }
 
 @keyframes driftLeft{ from{ transform:translateX(0);} to{ transform:translateX(-50%);} }
 
-/* ---------- Rain: two depth layers ---------- */
-.sky-rain-far{
+.sky-rain{
   position:absolute; inset:0; opacity:0; transition:opacity .8s ease; pointer-events:none;
+}
+.sky-rain-far{
   background-image:repeating-linear-gradient(
-    98deg, rgba(190,222,255,0.22) 0px, rgba(190,222,255,0.22) 1px,
-    transparent 1px, transparent 14px
+    98deg, rgba(190,225,255,0.28) 0px, rgba(190,225,255,0.28) 1px,
+    transparent 1px, transparent 20px
   );
   background-size:100% 260px;
-  filter:blur(0.6px);
-  animation:rainFall 0.75s linear infinite;
+  animation:rainFall 0.6s linear infinite;
+  filter:blur(0.4px);
 }
 .sky-rain-near{
-  position:absolute; inset:0; opacity:0; transition:opacity .8s ease; pointer-events:none;
   background-image:repeating-linear-gradient(
-    104deg, rgba(210,232,255,0.42) 0px, rgba(210,232,255,0.42) 2px,
-    transparent 2px, transparent 10px
+    102deg, rgba(210,235,255,0.4) 0px, rgba(210,235,255,0.4) 1.5px,
+    transparent 1.5px, transparent 13px
   );
-  background-size:100% 180px;
-  animation:rainFall 0.4s linear infinite;
+  background-size:100% 190px;
+  animation:rainFall 0.35s linear infinite;
 }
-@keyframes rainFall{ from{ background-position-y:0;} to{ background-position-y:100%;} }
+@keyframes rainFall{ from{ background-position-y:0;} to{ background-position-y:220px;} }
 
 /* ---------- Weather tiers ---------- */
 .sky.weather-clear{ --cloud-brightness:1; }
 .sky.weather-cloudy{ --cloud-brightness:0.92; }
-.sky.weather-rain{ --cloud-brightness:0.7; }
-.sky.weather-storm{ --cloud-brightness:0.5; }
+.sky.weather-rain{ --cloud-brightness:0.68; }
+.sky.weather-storm{ --cloud-brightness:0.46; }
 
 .sky.weather-rain .sky-rain-far{ opacity:0.35; }
-.sky.weather-rain .sky-rain-near{ opacity:0.5; }
-
-.sky.weather-storm .sky-rain-far{
-  opacity:0.55; animation-duration:0.4s;
-  background-size:100% 200px;
-}
+.sky.weather-rain .sky-rain-near{ opacity:0.3; }
+.sky.weather-storm .sky-rain-far{ opacity:0.55; animation-duration:0.4s; }
 .sky.weather-storm .sky-rain-near{
-  opacity:0.85; animation-duration:0.22s;
-  background-size:100% 140px;
+  opacity:0.6; animation-duration:0.22s;
+  background-size:100% 150px;
 }
 
 .sky-storm-overlay{
   position:absolute; inset:0; background:#05070c;
   opacity:var(--storm-dark); transition:opacity 1.3s ease; pointer-events:none;
 }
-/* --storm-dark is set inline by setSkyWeather(); this fallback guarantees
-   the overlay still darkens the scene during the storm tier even if the
-   custom property hasn't been set yet (e.g. before first JS call). */
-.sky.weather-storm{ --storm-dark:0.45; }
 
 .sky-vignette{
   position:absolute; inset:0;
   background:radial-gradient(120% 90% at 50% 0%, transparent 40%, rgba(6,10,18,0.55) 100%);
-}
-
-/* panels need to be a touch darker/less transparent against the bright day sky */
-.sky.day ~ .wrap .panel,
-.sky.day ~ .wrap .feature-card,
-.sky.day ~ .wrap .gauge-card,
-.sky.day ~ .wrap .table-wrap,
-.sky.day ~ .wrap .model-card,
-.sky.day ~ .wrap .auth-side{
-  --panel-bg:rgba(7,12,22,0.86);
 }
 
 /* ---------- Topbar ---------- */
