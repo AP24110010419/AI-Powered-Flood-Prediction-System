@@ -12,18 +12,19 @@
 
 # 📖 Project Overview
 
-The **AI-Powered Flood Prediction System** is a Flask-based web application that predicts the probability of floods using Machine Learning models, historical rainfall data, and live weather information.
+The **AI-Powered Flood Prediction System** is a Flask-based web application that predicts flood risk using Machine Learning models, historical rainfall data, and live weather information.
 
-The system provides an intuitive web interface that allows users to:
+The application allows users to:
 
-- 🔐 Register and Login securely
+- 🔐 Register and log in securely
 - 🌍 Fetch live weather data
 - 🌧️ Predict flood probability
-- 📜 View prediction history
+- 📊 View flood prediction results
+- 📜 Access prediction history
 - 🤖 Compare multiple Machine Learning models
-- 💾 Store prediction records in a database
+- 💾 Store prediction records in a SQLite database
 
-The project follows the database architecture:
+The system follows the database architecture:
 
 **Users → Weather_Data → Prediction_Result ← ML_Model**
 
@@ -31,10 +32,10 @@ The project follows the database architecture:
 
 # ✨ Features
 
-- 🔐 User Authentication (Login & Registration)
-- 🌍 Live Weather Integration (Open-Meteo API)
+- 🔐 Secure User Authentication
+- 🌍 Live Weather Integration using Open-Meteo API
 - 🌧️ AI-Based Flood Prediction
-- 📊 Interactive Dashboard
+- 📊 Interactive Prediction Dashboard
 - 📈 Flood Probability Estimation
 - 📜 Prediction History
 - 🤖 Multiple Machine Learning Models
@@ -93,57 +94,53 @@ AI-Powered-Flood-Prediction-System/
 
 ---
 
-# 📸 Application Screenshots
+## 📸 Application Screenshots
 
-<table>
-<tr>
-<td align="center">
-<b>Login Page</b><br>
-<img src="screenshots/login.png" width="430">
-</td>
+### 🔐 Login Page
 
-<td align="center">
-<b>Registration Page</b><br>
-<img src="screenshots/register.png" width="430">
-</td>
-</tr>
+![Login](screenshots/login.png)
 
-<tr>
-<td align="center">
-<b>Prediction Dashboard</b><br>
-<img src="screenshots/dashboard.png" width="430">
-</td>
+---
 
-<td align="center">
-<b>Flood Prediction Result</b><br>
-<img src="screenshots/flood_prediction.png" width="430">
-</td>
-</tr>
+### 📝 Registration Page
 
-<tr>
-<td align="center">
-<b>Prediction History</b><br>
-<img src="screenshots/history.png" width="430">
-</td>
+![Registration](screenshots/register.png)
 
-<td align="center">
-<b>Prediction Result</b><br>
-<img src="screenshots/result.png" width="430">
-</td>
-</tr>
+---
 
-<tr>
-<td align="center">
-<b>Users Table</b><br>
-<img src="screenshots/users_table.png" width="430">
-</td>
+### 📊 Prediction Dashboard
 
-<td align="center">
-<b>Weather Data Table</b><br>
-<img src="screenshots/weather_data.png" width="430">
-</td>
-</tr>
-</table>
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 🌊 Flood Prediction Result
+
+![Flood Prediction](screenshots/flood_prediction.png)
+
+---
+
+### 📈 Prediction Result Summary
+
+![Result](screenshots/result.png)
+
+---
+
+### 📜 Prediction History
+
+![History](screenshots/history.png)
+
+---
+
+### 🗄️ Database - Users Table
+
+![Users Table](screenshots/users_table.png)
+
+---
+
+### 🌦️ Database - Weather Data
+
+![Weather Data](screenshots/weather_data.png)
 
 ---
 
@@ -173,7 +170,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-### Open the application
+Open your browser and visit:
 
 ```
 http://127.0.0.1:5000
@@ -183,39 +180,37 @@ http://127.0.0.1:5000
 
 # 🌍 Live Weather Integration
 
-The application uses the **Open-Meteo API** to fetch:
+The application uses the **Open-Meteo API** to retrieve live:
 
-- 🌡 Temperature
+- 🌡️ Temperature
 - 💧 Humidity
-- ☁ Cloud Cover
+- ☁️ Cloud Cover
 
-Users can enter a location (for example, **Kochi, Kerala**) to retrieve current weather information before running the flood prediction.
+Users can enter any location (for example, **Kochi, Kerala**) to automatically fetch current weather information before running a flood prediction.
 
 ---
 
 # 🤖 Machine Learning Models
 
-The application evaluates multiple Machine Learning algorithms.
+The project evaluates multiple Machine Learning algorithms:
 
-| Model | Purpose |
-|--------|---------|
-| Decision Tree | Classification |
-| Random Forest | Active Prediction Model |
-| K-Nearest Neighbors (KNN) | Classification |
-| XGBoost | High Accuracy Prediction |
+- Decision Tree
+- Random Forest
+- K-Nearest Neighbors (KNN)
+- XGBoost
 
-The model with the best performance is automatically selected for live predictions.
+The best-performing model is automatically selected for live flood prediction.
 
 ---
 
-# 📊 Datasets
+# 📊 Dataset
 
 This project uses:
 
 - Flood Prediction Dataset
 - Rainfall in India (1901–2015)
 
-Prediction is based on the following features:
+Prediction is based on:
 
 - Annual Rainfall
 - Monsoon Rainfall
@@ -225,20 +220,20 @@ Prediction is based on the following features:
 
 ---
 
-# 🗄️ Database Schema
+# 🗄️ Database
 
-The system contains four primary tables:
+The application contains four primary tables:
 
 - Users
 - Weather_Data
 - Prediction_Result
 - ML_Model
 
-These tables store user accounts, weather readings, trained models, and prediction history.
+These tables store user information, weather records, prediction history, and machine learning model details.
 
 ---
 
-# 🔄 Project Workflow
+# 🔄 Workflow
 
 ```text
 User Login/Register
@@ -262,7 +257,7 @@ Machine Learning Model
 Flood Prediction
         │
         ▼
-Store Result in Database
+Save Prediction
         │
         ▼
 Prediction History
@@ -270,14 +265,14 @@ Prediction History
 
 ---
 
-# 🎯 Future Enhancements
+# 🚀 Future Enhancements
 
-- 📱 Mobile Application
 - ☁️ Cloud Deployment
+- 📱 Mobile Application
 - 📍 Interactive Flood Risk Maps
 - 📧 Email Notifications
 - 📊 Advanced Analytics Dashboard
-- 🌦 Weather Forecast Integration
+- 🌦️ Weather Forecast Integration
 
 ---
 
@@ -285,19 +280,19 @@ Prediction History
 
 **Bhargav Parimi**
 
-**B.Tech – Computer Science Engineering**
+B.Tech – Computer Science Engineering
 
-**SRM University AP**
+SRM University AP
 
-📧 Email: **bhargavparimi47@gmail.com**
+📧 **bhargavparimi47@gmail.com**
 
-🔗 GitHub: **https://github.com/AP24110010419**
+🔗 **https://github.com/AP24110010419**
 
 ---
 
 # ⭐ Support
 
-If you found this project useful, please consider giving it a ⭐ on GitHub.
+If you found this project useful, please give it a ⭐ on GitHub.
 
 ---
 
