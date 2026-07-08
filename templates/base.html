@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI-Powered Flood Prediction System{% endblock %}</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/icon-predict.svg') }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="sky" id="skyBg" aria-hidden="true">
+    <div class="sky-stars"></div>
+    <div class="sky-moon"></div>
+    <div class="sky-sun"></div>
+
+    <svg width="0" height="0" style="position:absolute">
+      <defs>
+        <radialGradient id="cloudGradBack" cx="38%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="#e2ebf5"/>
+          <stop offset="55%" stop-color="#c7d4e4"/>
+          <stop offset="100%" stop-color="#a9bad0"/>
+        </radialGradient>
+        <radialGradient id="cloudGradMid" cx="36%" cy="28%" r="78%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="55%" stop-color="#eef3f9"/>
+          <stop offset="100%" stop-color="#c9d6e6"/>
+        </radialGradient>
+        <radialGradient id="cloudGradFront" cx="34%" cy="26%" r="80%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="45%" stop-color="#ffffff"/>
+          <stop offset="80%" stop-color="#dde7f2"/>
+          <stop offset="100%" stop-color="#b9c8dc"/>
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <div class="cloud-layer layer-back">
+      <div class="cloud-track">
+        <svg class="cloud-set" viewBox="0 0 900 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradBack)">
+            <ellipse cx="120" cy="128" rx="140" ry="42"/>
+            <ellipse cx="185" cy="108" rx="90"  ry="36"/>
+            <ellipse cx="230" cy="95"  rx="100" ry="34"/>
+            <ellipse cx="70"  cy="112" rx="70"  ry="28"/>
+            <ellipse cx="520" cy="140" rx="160" ry="46"/>
+            <ellipse cx="470" cy="118" rx="95"  ry="34"/>
+            <ellipse cx="640" cy="110" rx="110" ry="36"/>
+            <ellipse cx="820" cy="130" rx="120" ry="38"/>
+            <ellipse cx="875" cy="112" rx="70"  ry="28"/>
+          </g>
+        </svg>
+        <svg class="cloud-set" viewBox="0 0 900 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradBack)">
+            <ellipse cx="120" cy="128" rx="140" ry="42"/>
+            <ellipse cx="185" cy="108" rx="90"  ry="36"/>
+            <ellipse cx="230" cy="95"  rx="100" ry="34"/>
+            <ellipse cx="70"  cy="112" rx="70"  ry="28"/>
+            <ellipse cx="520" cy="140" rx="160" ry="46"/>
+            <ellipse cx="470" cy="118" rx="95"  ry="34"/>
+            <ellipse cx="640" cy="110" rx="110" ry="36"/>
+            <ellipse cx="820" cy="130" rx="120" ry="38"/>
+            <ellipse cx="875" cy="112" rx="70"  ry="28"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cloud-layer layer-mid">
+      <div class="cloud-track">
+        <svg class="cloud-set" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradMid)">
+            <ellipse cx="80"  cy="158" rx="120" ry="40"/>
+            <ellipse cx="150" cy="132" rx="80"  ry="32"/>
+            <ellipse cx="180" cy="120" rx="90"  ry="32"/>
+            <ellipse cx="30"  cy="140" rx="60"  ry="26"/>
+            <ellipse cx="420" cy="168" rx="150" ry="44"/>
+            <ellipse cx="360" cy="140" rx="100" ry="36"/>
+            <ellipse cx="560" cy="130" rx="100" ry="34"/>
+            <ellipse cx="620" cy="150" rx="80"  ry="30"/>
+            <ellipse cx="760" cy="158" rx="130" ry="40"/>
+            <ellipse cx="700" cy="132" rx="85"  ry="30"/>
+          </g>
+        </svg>
+        <svg class="cloud-set" viewBox="0 0 900 240" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradMid)">
+            <ellipse cx="80"  cy="158" rx="120" ry="40"/>
+            <ellipse cx="150" cy="132" rx="80"  ry="32"/>
+            <ellipse cx="180" cy="120" rx="90"  ry="32"/>
+            <ellipse cx="30"  cy="140" rx="60"  ry="26"/>
+            <ellipse cx="420" cy="168" rx="150" ry="44"/>
+            <ellipse cx="360" cy="140" rx="100" ry="36"/>
+            <ellipse cx="560" cy="130" rx="100" ry="34"/>
+            <ellipse cx="620" cy="150" rx="80"  ry="30"/>
+            <ellipse cx="760" cy="158" rx="130" ry="40"/>
+            <ellipse cx="700" cy="132" rx="85"  ry="30"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="cloud-layer layer-front">
+      <div class="cloud-track">
+        <svg class="cloud-set" viewBox="0 0 900 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradFront)">
+            <ellipse cx="150" cy="190" rx="150" ry="46"/>
+            <ellipse cx="230" cy="158" rx="95"  ry="36"/>
+            <ellipse cx="270" cy="150" rx="100" ry="34"/>
+            <ellipse cx="80"  cy="168" rx="70"  ry="30"/>
+            <ellipse cx="560" cy="200" rx="170" ry="48"/>
+            <ellipse cx="490" cy="166" rx="105" ry="38"/>
+            <ellipse cx="700" cy="160" rx="110" ry="36"/>
+            <ellipse cx="770" cy="184" rx="80"  ry="32"/>
+          </g>
+        </svg>
+        <svg class="cloud-set" viewBox="0 0 900 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="url(#cloudGradFront)">
+            <ellipse cx="150" cy="190" rx="150" ry="46"/>
+            <ellipse cx="230" cy="158" rx="95"  ry="36"/>
+            <ellipse cx="270" cy="150" rx="100" ry="34"/>
+            <ellipse cx="80"  cy="168" rx="70"  ry="30"/>
+            <ellipse cx="560" cy="200" rx="170" ry="48"/>
+            <ellipse cx="490" cy="166" rx="105" ry="38"/>
+            <ellipse cx="700" cy="160" rx="110" ry="36"/>
+            <ellipse cx="770" cy="184" rx="80"  ry="32"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sky-haze"></div>
+    <div class="sky-rain-far"></div>
+    <div class="sky-rain-near"></div>
+    <div class="sky-storm-overlay"></div>
+    <div class="sky-vignette"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="{{ url_for('dashboard') if current_user.is_authenticated else url_for('login') }}">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M12 2C12 2 5 11 5 15.5C5 19.09 8.13 22 12 22C15.87 22 19 19.09 19 15.5C19 11 12 2 12 2Z" fill="#052321"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">AI Flood Predictor</div>
+          <div class="brand-sub">AI-Powered Flood Prediction System</div>
+        </div>
+      </a>
+      {% if current_user.is_authenticated %}
+      <div class="nav">
+        <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.endpoint=='dashboard' }}">
+          <img src="{{ url_for('static', filename='img/icon-predict.svg') }}" class="nav-icon" alt="">Predict
+        </a>
+        <a href="{{ url_for('history') }}" class="{{ 'active' if request.endpoint=='history' }}">
+          <img src="{{ url_for('static', filename='img/icon-history.svg') }}" class="nav-icon" alt="">History
+        </a>
+        <a href="{{ url_for('models_page') }}" class="{{ 'active' if request.endpoint=='models_page' }}">
+          <img src="{{ url_for('static', filename='img/icon-models.svg') }}" class="nav-icon" alt="">Models
+        </a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+        <span class="role-chip">{{ current_user.Role }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  <script>
+    (function initSkyTime() {
+      const sky = document.getElementById('skyBg');
+      if (!sky) return;
+      const hour = new Date().getHours();
+      const isDay = hour >= 6 && hour < 19; // roughly sunrise to sunset
+      sky.classList.toggle('day', isDay);
+      sky.classList.toggle('night', !isDay);
+    })();
+
+    // Called by dashboard.html when a live weather reading or slider changes,
+    // so the sky reflects the actual cloud cover / rain probability entered.
+    // Picks a discrete weather tier (clear / cloudy / rain / storm) for a clear
+    // visual jump, while opacity still scales smoothly within each tier.
+    window.setSkyWeather = function(cloudCoverPct, rainProbPct) {
+      const sky = document.getElementById('skyBg');
+      if (!sky) return;
+      const c = Math.max(0, Math.min(100, cloudCoverPct ?? 30));
+      const r = rainProbPct == null ? null : Math.max(0, Math.min(100, rainProbPct));
+
+      let tier = 'clear';
+      if (r !== null && r >= 65) tier = 'storm';
+      else if (r !== null && r >= 35) tier = 'rain';
+      else if (c >= 55) tier = 'cloudy';
+
+      sky.classList.remove('weather-clear', 'weather-cloudy', 'weather-rain', 'weather-storm');
+      sky.classList.add('weather-' + tier);
+
+      sky.style.setProperty('--cloud-opacity', (0.2 + c / 115).toFixed(2));
+      sky.style.setProperty('--star-opacity', Math.max(0.1, 1 - c / 90).toFixed(2));
+      sky.style.setProperty('--moon-opacity', Math.max(0.25, 1 - c / 110).toFixed(2));
+      sky.style.setProperty('--sun-opacity', Math.max(0.35, 1 - c / 140).toFixed(2));
+      sky.style.setProperty('--storm-dark', tier === 'storm' ? '0.45' : tier === 'rain' ? '0.18' : '0');
+    };
+  </script>
+</body>
+</html>

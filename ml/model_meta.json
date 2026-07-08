@@ -1,0 +1,34 @@
+[
+  {
+    "ModelName": "FloodPredictor-DecisionTree",
+    "AlgorithmType": "Decision Tree",
+    "Accuracy": 95.65,
+    "CV_Accuracy": 98.26,
+    "ModelFile": "decision_tree.pkl",
+    "IsActive": false
+  },
+  {
+    "ModelName": "FloodPredictor-RandomForest",
+    "AlgorithmType": "Random Forest",
+    "Accuracy": 95.65,
+    "CV_Accuracy": 99.13,
+    "ModelFile": "best_model.pkl",
+    "IsActive": true
+  },
+  {
+    "ModelName": "FloodPredictor-KNN",
+    "AlgorithmType": "K-Nearest Neighbours",
+    "Accuracy": 95.65,
+    "CV_Accuracy": 91.3,
+    "ModelFile": "knn.pkl",
+    "IsActive": false
+  },
+  {
+    "ModelName": "FloodPredictor-XGBoost",
+    "AlgorithmType": "XGBoost",
+    "Accuracy": 86.96,
+    "CV_Accuracy": 99.13,
+    "ModelFile": "xgboost.pkl",
+    "IsActive": false
+  }
+]

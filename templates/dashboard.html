@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% block title %}Predict · AI-Powered Flood Prediction System{% endblock %}
+{% block content %}
+
+<div class="hero">
+  <div>
+    <img class="hero-illustration" src="{{ url_for('static', filename='img/hero-flood.svg') }}" alt="Illustration of a flooded city skyline at night">
+
+    <h1 style="font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,3.4vw,36px); line-height:1.1; margin:0 0 14px;">
+      Know a flood is coming <span style="color:var(--safe);">before the rain does.</span>
+    </h1>
+    <p style="color:var(--ink-dim); font-size:15px; line-height:1.6; max-width:48ch; margin:0 0 22px;">
+      Enter rainfall, cloud, temperature, and humidity readings for a district and get an instant risk classification from the trained model.
+    </p>
+
+    <div class="feature-row">
+      <div class="feature-card">
+        <img src="{{ url_for('static', filename='img/icon-predict.svg') }}" alt="">
+        <b>Instant prediction</b>
+        <span>Score flood risk from live or manual readings.</span>
+      </div>
+      <div class="feature-card">
+        <img src="{{ url_for('static', filename='img/icon-models.svg') }}" alt="">
+        <b>4 trained models</b>
+        <span>Decision Tree, Random Forest, KNN, XGBoost.</span>
+      </div>
+      <div class="feature-card">
+        <img src="{{ url_for('static', filename='img/icon-history.svg') }}" alt="">
+        <b>Full history</b>
+        <span>Every reading and outcome, saved per user.</span>
+      </div>
+    </div>
+
+    <form method="post" class="panel">
+      <div class="panel-label"><span>Input readings</span><span>{{ current_user.Role }}</span></div>
+
+      <div class="field">
+        <label for="region">District / region</label>
+        <input type="text" id="region" name="region" placeholder="e.g. Kottayam">
+      </div>
+
+      <div class="field">
+        <label for="live_location">Pull current weather for a place <b id="liveStatus" style="color:var(--ink-faint); font-weight:400;"></b></label>
+        <div style="display:flex; gap:8px;">
+          <input type="text" id="live_location" placeholder="e.g. Kochi, Kerala" style="flex:1;">
+          <button type="button" id="fetchLiveBtn" class="btn btn-ghost" style="width:auto; white-space:nowrap; margin-top:0;">Use current weather</button>
+        </div>
+        <div id="rainChip" style="display:none; margin-top:10px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-dim);">
+          Chance of rain right now: <b id="rainPct" style="color:var(--ink);"></b>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="state_select">Autofill rainfall from historical state average (optional)</label>
+        <select id="state_select">
+          <option value="">— none —</option>
+          {% for s in states %}
+          <option value="{{ s }}">{{ s.title() }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="annual_rainfall">Annual rainfall <b id="annualVal">2200 mm</b></label>
+          <input type="range" id="annual_rainfall" name="annual_rainfall" min="300" max="4500" step="10" value="2200">
+        </div>
+        <div class="field">
+          <label for="seasonal_rainfall">Monsoon (Jun–Sep) rainfall <b id="seasonalVal">1200 mm</b></label>
+          <input type="range" id="seasonal_rainfall" name="seasonal_rainfall" min="100" max="3000" step="10" value="1200">
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label for="temperature">Temperature <b id="tempVal">29 °C</b></label>
+          <input type="range" id="temperature" name="temperature" min="20" max="40" step="1" value="29">
+        </div>
+        <div class="field">
+          <label for="humidity">Humidity <b id="humidityVal">74%</b></label>
+          <input type="range" id="humidity" name="humidity" min="40" max="100" step="1" value="74">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cloud_visibility">Cloud cover <b id="cloudVal">36%</b></label>
+        <input type="range" id="cloud_visibility" name="cloud_visibility" min="0" max="100" step="1" value="36">
+      </div>
+
+      <button type="submit" class="btn">Run prediction</button>
+    </form>
+  </div>
+
+  <div class="gauge-card">
+    <div class="gauge-head">
+      <span class="panel-label">Live risk gauge</span>
+      <span class="risk-tag" id="riskTag"
+        style="border-color:{{ {'Low':'var(--safe)','Moderate':'var(--moderate)','High':'var(--high)','Severe':'var(--severe)'}.get(result.level, 'var(--ink-faint)') if result else 'var(--ink-faint)' }};
+               color:{{ {'Low':'var(--safe)','Moderate':'var(--moderate)','High':'var(--high)','Severe':'var(--severe)'}.get(result.level, 'var(--ink-faint)') if result else 'var(--ink-faint)' }};">
+        {{ (result.level ~ ' risk') if result else 'awaiting input' }}
+      </span>
+    </div>
+    <div class="gauge-stage">
+      <div class="water" id="waterFill" data-pct="{{ result.probability if result else 0 }}"
+           data-level="{{ result.level if result else '' }}"></div>
+      <svg class="district-svg" viewBox="0 0 200 220" fill="none">
+        <path d="M100 8 C130 40 172 90 172 138 C172 178 140 210 100 210 C60 210 28 178 28 138 C28 90 70 40 100 8Z"
+              stroke="#3a4a63" stroke-width="2" fill="rgba(255,255,255,0.02)"/>
+      </svg>
+    </div>
+    <div class="readout">
+      <div class="readout-score">{{ result.probability if result else '—' }}<sup>%</sup></div>
+      <div class="readout-desc">
+        {% if result %}
+          Prediction: <b style="color:var(--ink);">{{ result.flood_result }}</b> for {{ result.region }} — via {{ result.model_name }}.
+        {% else %}
+          Adjust the readings and run a prediction to see this district's flood probability.
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-head">
+  <div>
+    <h2>Recent predictions</h2>
+    <p>Your last few readings and their outcomes.</p>
+  </div>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Region</th><th>Annual</th><th>Monsoon</th><th>Result</th><th>Probability</th><th>When</th></tr>
+    </thead>
+    <tbody>
+      {% if recent %}
+        {% for w, p in recent %}
+        <tr>
+          <td class="region-name">{{ w.Region or 'Unnamed district' }}</td>
+          <td class="mono">{{ w.AnnualRainfall|round(0)|int }} mm</td>
+          <td class="mono">{{ w.SeasonalRainfall|round(0)|int }} mm</td>
+          <td>
+            {% set c = 'var(--severe)' if p.FloodResult=='Flood' else 'var(--safe)' %}
+            <span class="badge" style="border-color:{{c}}; color:{{c}};">{{ p.FloodResult }}</span>
+          </td>
+          <td class="mono">{{ p.FloodProbability }}%</td>
+          <td class="mono">{{ p.PredictionDate.strftime('%d %b, %H:%M') }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr class="empty-row"><td colspan="6">No readings logged yet — run a prediction to add one.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<div class="footnote">
+  <div><b>About predictions.</b> Served by the model currently marked active on the <a href="{{ url_for('models_page') }}" style="color:var(--safe);">Models</a> page, trained on your historical flood dataset.</div>
+</div>
+
+<script>
+  const ids = ['annual_rainfall','seasonal_rainfall','temperature','humidity','cloud_visibility'];
+  const labelIds = { annual_rainfall:'annualVal', seasonal_rainfall:'seasonalVal', temperature:'tempVal', humidity:'humidityVal', cloud_visibility:'cloudVal' };
+  const units = { annual_rainfall:' mm', seasonal_rainfall:' mm', temperature:' °C', humidity:'%', cloud_visibility:'%' };
+
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    const label = document.getElementById(labelIds[id]);
+    el.addEventListener('input', () => { label.textContent = el.value + units[id]; });
+  });
+
+  // sky reacts live as the cloud cover slider moves
+  const cloudSlider = document.getElementById('cloud_visibility');
+  cloudSlider.addEventListener('input', () => {
+    if (window.setSkyWeather) window.setSkyWeather(Number(cloudSlider.value), null);
+  });
+  if (window.setSkyWeather) window.setSkyWeather(Number(cloudSlider.value), null);
+
+  const fetchLiveBtn = document.getElementById('fetchLiveBtn');
+  const liveLocation = document.getElementById('live_location');
+  const liveStatus = document.getElementById('liveStatus');
+
+  fetchLiveBtn.addEventListener('click', async () => {
+    const place = liveLocation.value.trim();
+    if (!place) { liveStatus.textContent = 'enter a place first'; return; }
+
+    liveStatus.textContent = 'fetching…';
+    fetchLiveBtn.disabled = true;
+    try {
+      const res = await fetch(`/api/live-weather?location=${encodeURIComponent(place)}`);
+      const data = await res.json();
+      if (!res.ok) {
+        liveStatus.textContent = data.error || 'could not fetch weather';
+        return;
+      }
+      document.getElementById('temperature').value = Math.round(data.temperature);
+      document.getElementById('humidity').value = Math.round(data.humidity);
+      document.getElementById('cloud_visibility').value = Math.round(data.cloud_cover);
+      document.getElementById('tempVal').textContent = Math.round(data.temperature) + ' °C';
+      document.getElementById('humidityVal').textContent = Math.round(data.humidity) + '%';
+      document.getElementById('cloudVal').textContent = Math.round(data.cloud_cover) + '%';
+
+      const regionField = document.getElementById('region');
+      if (!regionField.value) regionField.value = data.resolved_name;
+
+      const rainChip = document.getElementById('rainChip');
+      const rainPct = document.getElementById('rainPct');
+      if (data.rain_probability !== null && data.rain_probability !== undefined) {
+        rainChip.style.display = 'block';
+        rainPct.textContent = Math.round(data.rain_probability) + '%';
+      } else {
+        rainChip.style.display = 'none';
+      }
+
+      liveStatus.textContent = `live · ${data.resolved_name}`;
+
+      if (window.setSkyWeather) window.setSkyWeather(data.cloud_cover, data.rain_probability);
+    } catch (e) {
+      liveStatus.textContent = 'network error';
+    } finally {
+      fetchLiveBtn.disabled = false;
+    }
+  });
+
+  const stateSelect = document.getElementById('state_select');
+  stateSelect.addEventListener('change', async () => {
+    if (!stateSelect.value) return;
+    try {
+      const res = await fetch(`/api/state-rainfall/${encodeURIComponent(stateSelect.value)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      document.getElementById('annual_rainfall').value = Math.round(data.annual);
+      document.getElementById('seasonal_rainfall').value = Math.round(data.jun_sep);
+      document.getElementById('annualVal').textContent = Math.round(data.annual) + ' mm';
+      document.getElementById('seasonalVal').textContent = Math.round(data.jun_sep) + ' mm';
+    } catch (e) { console.error(e); }
+  });
+
+  // animate gauge on load if a result exists
+  const water = document.getElementById('waterFill');
+  const pct = parseFloat(water.dataset.pct || '0');
+  const levelColors = { Low: '#2dd4bf', Moderate: '#f2b134', High: '#f2542d', Severe: '#b91c1c' };
+  const color = levelColors[water.dataset.level] || '#2dd4bf';
+  requestAnimationFrame(() => {
+    water.style.height = pct + '%';
+    water.style.background = `linear-gradient(180deg, ${color}88 0%, ${color}dd 100%)`;
+  });
+</script>
+{% endblock %}

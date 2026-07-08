@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Models · AI-Powered Flood Prediction System{% endblock %}
+{% block content %}
+<div class="section-head" style="margin-top:0;">
+  <div>
+    <h2>Model comparison</h2>
+    <p>Decision Tree, Random Forest, KNN, and XGBoost trained on your flood dataset. Accuracy measured on a held-out test split.</p>
+  </div>
+</div>
+
+<div class="model-grid">
+  {% for m in models %}
+  <div class="panel model-card {{ 'active' if m.IsActive }}">
+    {% if m.IsActive %}<span class="active-tag">Active</span>{% endif %}
+    <div class="model-icon"><img src="{{ url_for('static', filename='img/icon-models.svg') }}" alt=""></div>
+    <h3>{{ m.AlgorithmType }}</h3>
+    <div class="type">{{ m.ModelName }}</div>
+    <div class="acc">{{ m.Accuracy }}%</div>
+    <div class="acc-label">test accuracy</div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="footnote">
+  <div><b>Note.</b> This dataset has 115 labelled samples with a class imbalance (16 flood events). Accuracy is a useful signal here but should be read alongside precision/recall before operational deployment on a larger dataset.</div>
+</div>
+{% endblock %}

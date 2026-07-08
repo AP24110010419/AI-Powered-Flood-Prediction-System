@@ -1,0 +1,9 @@
+Flask>=3.0
+Flask-SQLAlchemy>=3.1
+Flask-Login>=0.6
+Werkzeug>=3.0
+pandas>=2.2
+scikit-learn>=1.5
+xgboost>=2.1
+openpyxl>=3.1
+requests

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Register · AI-Powered Flood Prediction System{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="auth-side">
+    <img class="hero-img" src="{{ url_for('static', filename='img/hero-flood.svg') }}" alt="Illustration of a flooded city skyline at night">
+    <div class="auth-side-copy">
+      <h2>Built for the people who answer when the water rises.</h2>
+      <p>Register as a meteorologist, disaster coordinator, or analyst to start logging readings and predictions.</p>
+      <div class="auth-stat-row">
+        <div class="auth-stat"><b>36</b><span>states covered</span></div>
+        <div class="auth-stat"><b>~99%</b><span>best model CV accuracy</span></div>
+        <div class="auth-stat"><b>3</b><span>roles supported</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-form-col">
+    <div class="auth-shell">
+      <h1>Create an account</h1>
+      <p class="sub">For meteorologists, disaster coordinators, and analysts.</p>
+
+      <form method="post" class="panel">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="role">Role</label>
+          <select id="role" name="role">
+            <option value="Meteorologist">Meteorologist</option>
+            <option value="Disaster Coordinator">Disaster Coordinator</option>
+            <option value="Analyst">Analyst</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="6">
+        </div>
+        <button type="submit" class="btn">Create account</button>
+      </form>
+
+      <div class="switch">Already registered? <a href="{{ url_for('login') }}">Log in</a></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

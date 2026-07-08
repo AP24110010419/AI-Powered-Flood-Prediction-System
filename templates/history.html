@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}History · FloodWatch{% endblock %}
+{% block content %}
+<div class="section-head" style="margin-top:0;">
+  <div>
+    <h2>Prediction history</h2>
+    <p>Every reading you've logged and its outcome.</p>
+  </div>
+</div>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>Region</th><th>Annual</th><th>Monsoon</th><th>Temp</th><th>Humidity</th><th>Model</th><th>Result</th><th>Probability</th><th>When</th></tr>
+    </thead>
+    <tbody>
+      {% if rows %}
+        {% for w, p, m in rows %}
+        <tr>
+          <td class="region-name">{{ w.Region or 'Unnamed district' }}</td>
+          <td class="mono">{{ w.AnnualRainfall|round(0)|int }} mm</td>
+          <td class="mono">{{ w.SeasonalRainfall|round(0)|int }} mm</td>
+          <td class="mono">{{ w.Temperature }} °C</td>
+          <td class="mono">{{ w.Humidity }}%</td>
+          <td>{{ m.AlgorithmType }}</td>
+          <td>
+            {% set c = 'var(--severe)' if p.FloodResult=='Flood' else 'var(--safe)' %}
+            <span class="badge" style="border-color:{{c}}; color:{{c}};">{{ p.FloodResult }}</span>
+          </td>
+          <td class="mono">{{ p.FloodProbability }}%</td>
+          <td class="mono">{{ p.PredictionDate.strftime('%d %b %Y, %H:%M') }}</td>
+        </tr>
+        {% endfor %}
+      {% else %}
+        <tr class="empty-row"><td colspan="9">No predictions yet.</td></tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
